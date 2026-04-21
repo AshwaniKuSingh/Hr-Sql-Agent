@@ -15,8 +15,7 @@ WORKDIR /app
 COPY --from=builder /usr/local/lib/python3.11/site-packages /usr/local/lib/python3.11/site-packages
 COPY --from=builder /usr/local/bin/uvicorn /usr/local/bin/uvicorn
 
-COPY schema.py .
-COPY agent.py .
+COPY main.py .
 
 ENV POSTGRES_HOST=db
 ENV POSTGRES_PORT=5432
@@ -26,4 +25,4 @@ ENV POSTGRES_DB=hrdb
 ENV OLLAMA_HOST=http://ollama:11434
 ENV OLLAMA_MODEL=llama3.2
 
-CMD ["uvicorn", "agent:app", "--host", "0.0.0.0", "--port", "8001"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
